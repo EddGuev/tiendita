@@ -2,12 +2,17 @@
 
 Proyecto de administración de productos de una pequeña tienda, compuesto por dos servidores:
 
-1. **API REST** (FastAPI, puerto `8000`) — implementa tres métodos HTTP:
+1. **API REST** (FastAPI, puerto `8000`) — implementa tres métodos HTTP asíncronos:
    - `GET /productos` → consulta y muestra los productos del inventario.
    - `POST /productos` → agrega un nuevo producto.
    - `DELETE /productos/{id}` → elimina un producto.
 
 2. **Cliente web** (HTML + Bootstrap + JavaScript, puerto `3000`) — consume la API mediante `fetch()`, demostrando la comunicación entre dos servidores diferentes (cliente ↔ API).
+
+## Programación concurrente y distribuida
+
+- **Endpoints asíncronos** (`async def`): comparten el bucle de eventos de `asyncio` y no bloquean el servidor mientras esperan (no siempre es necesario usar `await`; solo cuando existe una operación de E/S real).
+- **Middleware de limitación de peticiones (Rate Limiting)**: permite un máximo de **5 peticiones por segundo por IP** usando `asyncio.Lock` para proteger la estructura compartida. Al superar el límite responde `HTTP 429` (Too Many Requests).
 
 ## Estructura
 
