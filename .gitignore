@@ -3,3 +3,4 @@ __pycache__/
 test/
 screenshots/
 .abacus.donotdelete
+locust_report.html
